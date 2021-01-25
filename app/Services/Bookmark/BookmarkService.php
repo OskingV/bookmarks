@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Services\Bookmark;
+use App\Http\Requests\API\Bookmark\IndexRequest;
 use App\Http\Requests\API\Bookmark\StoreRequest;
 use App\Models\Bookmark;
 use App\Repositories\BookmarkRepository;
 use App\Services\Site\Contracts\Parser;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class BookmarkService
 {
@@ -41,5 +43,18 @@ class BookmarkService
         $parsedData['url'] = $url;
         $bookmark = $this->repository->store($parsedData);
         return $bookmark;
+    }
+
+    /**
+     *
+     * Get bookmarks list collection.
+     *
+     * @param IndexRequest $request
+     *
+     * @return LengthAwarePaginator
+     */
+    public function getList(IndexRequest $request): LengthAwarePaginator
+    {
+        return $this->repository->getList();
     }
 }

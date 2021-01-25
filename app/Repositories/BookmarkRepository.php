@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Bookmark;
 use App\Models\Bookmark as Model;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class BookmarkRepository extends BaseRepository
 {
@@ -29,5 +30,19 @@ class BookmarkRepository extends BaseRepository
     public function store(array $data): Bookmark
     {
          return $this->start()->create($data);
+    }
+
+    /**
+     * @return LengthAwarePaginator
+     */
+    public function getList(): LengthAwarePaginator
+    {
+        return $this->start()->paginate(3, [
+            'id',
+            'favicon_path',
+            'url',
+            'title',
+            'created_at'
+        ]);
     }
 }

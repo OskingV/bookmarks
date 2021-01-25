@@ -39,4 +39,28 @@ class BookmarkTest extends TestCase
             ]
         ]);
     }
+
+    /**
+     * Test get bookmarks list method
+     */
+    public function testIndex()
+    {
+        $bookmarks = Bookmark::factory()->count($this->faker->numberBetween(0, 3))->create();
+        $url = config('app.url') . '/api/bookmarks';
+        $response = $this->json('GET', $url);
+        $response->assertStatus(200);
+        $array = [];
+        foreach ($bookmarks as $bookmark) {
+            $array[] = [
+                'id' => $bookmark->id,
+                'created_at' => $bookmark->created_at->format('H:i d.m.Y'),
+                'favicon_url' => $bookmark->url . $bookmark->favicon_path,
+                'url' => $bookmark->url,
+                'title' => $bookmark->title
+            ];
+        }
+        $response->assertJsonFragment([
+            'data' => $array
+        ]);
+    }
 }
