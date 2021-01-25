@@ -17,4 +17,5 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('bookmarks')
     ->group(function () {
         Route::post('', 'App\Http\Controllers\API\Bookmark\StoreController');
+        Route::get('', 'App\Http\Controllers\API\Bookmark\IndexController');
     });
