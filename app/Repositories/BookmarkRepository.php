@@ -45,4 +45,24 @@ class BookmarkRepository extends BaseRepository
             'created_at'
         ]);
     }
+
+    /**
+     *
+     * Get bookmark item by id.
+     *
+     * @param $bookmarkId
+     *
+     * @return Bookmark
+     */
+    public function getItem($bookmarkId): Bookmark
+    {
+        return $this->start()->findOrFail($bookmarkId,[
+            'favicon_path',
+            'url',
+            'title',
+            'meta_description',
+            'meta_keywords',
+            'created_at'
+        ]);
+    }
 }
