@@ -31,7 +31,7 @@ class BookmarkTest extends TestCase
             'data' => [
                 'id' => $storedBookmark->id,
                 'created_at' => $storedBookmark->created_at->format('H:i d.m.Y'),
-                'favicon_url' => $storedBookmark->url . $storedBookmark->favicon_path,
+                'favicon_url' => $storedBookmark->favicon_url,
                 'url' => $storedBookmark->url,
                 'title' => $storedBookmark->title,
                 'meta_description' => $storedBookmark->meta_description,
@@ -54,7 +54,7 @@ class BookmarkTest extends TestCase
             $array[] = [
                 'id' => $bookmark->id,
                 'created_at' => $bookmark->created_at->format('H:i d.m.Y'),
-                'favicon_url' => $bookmark->url . $bookmark->favicon_path,
+                'favicon_url' => $bookmark->favicon_url,
                 'url' => $bookmark->url,
                 'title' => $bookmark->title
             ];

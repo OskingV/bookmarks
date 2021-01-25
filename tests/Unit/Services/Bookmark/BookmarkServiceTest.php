@@ -25,7 +25,7 @@ class BookmarkServiceTest extends TestCase
         $service = app(BookmarkService::class);
         $url = $this->faker->url;
         $bookmarkData = [
-            'favicon_path' => '/favicon.ico',
+            'favicon_url' => $this->faker->url,
             'title' => $this->faker->title,
             'meta_description' => $this->faker->sentence,
             'meta_keywords' => $this->faker->sentence

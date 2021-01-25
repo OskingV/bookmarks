@@ -19,4 +19,16 @@ export default {
                 .catch((error) => { reject(error) })
         })
     },
+    index ({ commit }, payload) {
+        const queryString = Object.keys(payload).map(key => key + '=' + payload[key]).join('&');
+        return new Promise((resolve, reject) => {
+            axios.get(`/api/bookmarks/?${queryString}`)
+                .then((response) => {
+                    commit('retrieveList', response.data.data);
+                    commit('retrieveListMeta', response.data.meta);
+                    resolve(response)
+                })
+                .catch((error) => { reject(error) })
+        })
+    }
 }

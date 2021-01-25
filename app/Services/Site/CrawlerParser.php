@@ -45,7 +45,7 @@ class CrawlerParser implements Parser
                 '//title',
                 'text'
             ],
-            'favicon_path' => [
+            'favicon' => [
                 '//link[@rel="shortcut icon"]',
                 'attr',
                 'href'

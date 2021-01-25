@@ -16,13 +16,13 @@ class BaseResource extends JsonResource
     public function toArray($request)
     {
         $modifiedFields = [
-            'created_at' => $this->created_at->format('H:i d.m.Y'),
-            'favicon_url' => $this->url . $this->favicon_path
+            'created_at' => $this->created_at->format('H:i d.m.Y')
         ];
         $unmodifiedFields = Arr::fillArrayByObject([
             'id',
             'url',
-            'title'
+            'title',
+            'favicon_url'
         ], $this);
         $array = array_merge($modifiedFields, $unmodifiedFields);
         return $array;
