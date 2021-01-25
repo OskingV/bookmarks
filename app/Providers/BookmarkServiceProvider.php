@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Bookmark;
+use App\Observers\BookmarkObserver;
 use App\Services\Site\Contracts\Parser;
 use App\Services\Site\CrawlerParser;
 use Illuminate\Support\ServiceProvider;
@@ -25,6 +27,6 @@ class BookmarkServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Bookmark::observe(BookmarkObserver::class);
     }
 }

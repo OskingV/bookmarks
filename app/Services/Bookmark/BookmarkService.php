@@ -57,4 +57,17 @@ class BookmarkService
     {
         return $this->repository->getList();
     }
+
+    /**
+     *
+     * Get bookmark by id.
+     *
+     * @param int $id
+     *
+     * @return Bookmark
+     */
+    public function getItem(int $id): Bookmark
+    {
+        return $this->repository->getItem($id);
+    }
 }
