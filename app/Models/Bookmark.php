@@ -23,7 +23,7 @@ class Bookmark extends Model
      * @var array
      */
     protected $fillable = [
-        'favicon_path',
+        'favicon_url',
         'url',
         'title',
         'meta_description',

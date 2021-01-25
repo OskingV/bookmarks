@@ -21,9 +21,81 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
-    return {};
+    return {
+      page: 1
+    };
+  },
+  computed: {
+    list: function list() {
+      return this.$store.getters['bookmark/list'];
+    },
+    listMeta: function listMeta() {
+      return this.$store.getters['bookmark/listMeta'];
+    }
+  },
+  methods: {
+    getListByPage: function getListByPage(page) {
+      var _this = this;
+
+      var payload = {
+        page: page
+      };
+      this.$store.dispatch('bookmark/index', payload).then(function () {
+        _this.page = page;
+      });
+    },
+    getList: function getList() {
+      this.$store.dispatch('bookmark/index', {
+        page: this.page
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.getList();
   }
 });
 
@@ -134,10 +206,109 @@ var render = function() {
           [_vm._v("Add bookmark")]
         )
       ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row", staticStyle: { "margin-top": "15px" } }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _c("table", { staticClass: "table" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.list, function(bookmark) {
+              return _c(
+                "tr",
+                {
+                  key: bookmark.id,
+                  staticStyle: { cursor: "pointer" },
+                  on: {
+                    click: function($event) {
+                      return _vm.$router.push({
+                        name: "bookmark",
+                        params: { id: bookmark.id, load: true }
+                      })
+                    }
+                  }
+                },
+                [
+                  _c("th", [_vm._v(_vm._s(bookmark.created_at))]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c("img", {
+                      staticStyle: { width: "16px" },
+                      attrs: { src: bookmark.favicon_url, alt: "favicon" }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(bookmark.url))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(bookmark.title))])
+                ]
+              )
+            }),
+            0
+          )
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row", staticStyle: { "margin-top": "15px" } }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _c("nav", { attrs: { "aria-label": "Page navigation example" } }, [
+          _c(
+            "ul",
+            { staticClass: "pagination" },
+            _vm._l(_vm.listMeta.links, function(link) {
+              return _c(
+                "li",
+                {
+                  key: link.label,
+                  staticClass: "page-item",
+                  class: { active: link.active }
+                },
+                [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "page-link",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.getListByPage(link.label)
+                        }
+                      }
+                    },
+                    [_vm._v(_vm._s(link.label))]
+                  )
+                ]
+              )
+            }),
+            0
+          )
+        ])
+      ])
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Created at")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Favicon")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Url")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Title")])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 

@@ -39,7 +39,7 @@ class BookmarkRepository extends BaseRepository
     {
         return $this->start()->paginate(3, [
             'id',
-            'favicon_path',
+            'favicon_url',
             'url',
             'title',
             'created_at'
@@ -57,7 +57,7 @@ class BookmarkRepository extends BaseRepository
     public function getItem($bookmarkId): Bookmark
     {
         return $this->start()->findOrFail($bookmarkId,[
-            'favicon_path',
+            'favicon_url',
             'url',
             'title',
             'meta_description',

@@ -27,6 +27,6 @@ class BookmarkServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Bookmark::observe(BookmarkObserver::class);
+        //
     }
 }

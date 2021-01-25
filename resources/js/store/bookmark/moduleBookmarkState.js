@@ -1,4 +1,8 @@
 export default {
+    list: [],
+    listMeta: {
+        links: []
+    },
     item: {
         created_at: '',
         favicon_url: '',
