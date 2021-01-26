@@ -16,24 +16,24 @@
 </template>
 
 <script>
-    export default {
-        data () {
-            return {
-                errorMessage: '',
-                url: ''
-            }
-        },
-        methods: {
-            store () {
-                const payload = {
-                    url: this.url
-                };
-                this.$store.dispatch('bookmark/store', payload).then(() => {
-                    this.$router.push({ name: 'bookmark', params: { id: this.$store.getters['bookmark/item'].id, load: false }})
-                }).catch((error) => {
-                    this.errorMessage = error.response.data.errors.url[0]
-                })
-            }
+export default {
+    data () {
+        return {
+            errorMessage: '',
+            url: ''
+        }
+    },
+    methods: {
+        store () {
+            const payload = {
+                url: this.url
+            };
+            this.$store.dispatch('bookmark/store', payload).then(() => {
+                this.$router.push({ name: 'bookmark', params: { id: this.$store.getters['bookmark/item'].id, load: false }})
+            }).catch((error) => {
+                this.errorMessage = error.response.data.errors.url[0]
+            })
         }
     }
+}
 </script>
