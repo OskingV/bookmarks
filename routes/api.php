@@ -18,5 +18,6 @@ Route::prefix('bookmarks')
     ->group(function () {
         Route::post('', 'App\Http\Controllers\API\Bookmark\StoreController');
         Route::get('', 'App\Http\Controllers\API\Bookmark\IndexController');
+        Route::get('excel', 'App\Http\Controllers\API\Bookmark\ExcelController');
         Route::get('{bookmark}', 'App\Http\Controllers\API\Bookmark\ShowController');
     });

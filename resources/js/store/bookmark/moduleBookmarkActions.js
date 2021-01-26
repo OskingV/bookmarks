@@ -1,3 +1,5 @@
+import FileSaver from 'file-saver'
+
 export default {
     store ({ commit }, payload) {
         return new Promise((resolve, reject) => {
@@ -30,5 +32,18 @@ export default {
                 })
                 .catch((error) => { reject(error) })
         })
-    }
+    },
+    downloadExcelFile () {
+        return new Promise((resolve, reject) => {
+            axios.get('/api/bookmarks/excel', {
+                responseType: 'blob'
+            })
+                .then((response) => {
+                    FileSaver.saveAs(response.data, 'bookmarks.xlsx')
+                })
+                .catch((error) => {
+                    reject(error)
+                })
+        })
+    },
 }
