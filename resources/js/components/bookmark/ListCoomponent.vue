@@ -5,6 +5,13 @@
                 <button type="button" class="btn btn-primary" @click="$router.push('create-bookmark')">Add bookmark</button>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div style="margin-top: 15px">
+                    <button type="button" class="btn btn-primary" @click="$store.dispatch('bookmark/downloadExcelFile')">Download excel file</button>
+                </div>
+            </div>
+        </div>
         <div class="row" style="margin-top:15px">
             <div class="col-md-12">
                 <table class="table">

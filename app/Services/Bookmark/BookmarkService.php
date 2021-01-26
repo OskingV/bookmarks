@@ -8,6 +8,7 @@ use App\Models\Bookmark;
 use App\Repositories\BookmarkRepository;
 use App\Services\Bookmark\Contracts\Parser;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Collection;
 
 class BookmarkService
 {
@@ -80,5 +81,16 @@ class BookmarkService
     public function getItem(int $id): Bookmark
     {
         return $this->repository->getItem($id);
+    }
+
+    /**
+     *
+     * Get bookmarks list collection for excel file.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getExcelList(): Collection
+    {
+        return $this->repository->getExcelList();
     }
 }
