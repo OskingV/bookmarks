@@ -11,7 +11,6 @@ class Arr extends ParentClass
      *
      * @param array $arr
      * @param object $object
-     *
      * @return array
      */
     public static function fillArrayByObject(array $arr, object $object): array
@@ -21,5 +20,21 @@ class Arr extends ParentClass
             $resultArr[$value] = $object->$value;
         }
         return $resultArr;
+    }
+
+    /**
+     *
+     * Rename key in array.
+     *
+     * @param array $arr
+     * @param string $oldKeyName
+     * @param string $newKeyName
+     * @return void
+     *
+     */
+    public static function renameKey(array &$arr, string $oldKeyName, string $newKeyName): void
+    {
+        $arr[$newKeyName] = $arr[$oldKeyName];
+        unset($arr[$oldKeyName]);
     }
 }

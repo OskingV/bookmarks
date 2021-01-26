@@ -2,9 +2,10 @@
 
 namespace Tests\Unit\Services\Bookmark;
 
+use App\Helpers\Arr;
 use App\Http\Requests\API\Bookmark\StoreRequest;
 use App\Services\Bookmark\BookmarkService;
-use App\Services\Site\Contracts\Parser;
+use App\Services\Bookmark\Contracts\Parser;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -20,12 +21,12 @@ class BookmarkServiceTest extends TestCase
      *
      * @return void
      */
-    public function testStore()
+    public function testStore(): void
     {
         $service = app(BookmarkService::class);
         $url = $this->faker->url;
         $bookmarkData = [
-            'favicon_url' => $this->faker->url,
+            'favicon' => $this->faker->url,
             'title' => $this->faker->title,
             'meta_description' => $this->faker->sentence,
             'meta_keywords' => $this->faker->sentence
@@ -41,6 +42,7 @@ class BookmarkServiceTest extends TestCase
         $this->instance(StoreRequest::class, $storeRequestMock);
         $bookmark = app()->call([$service, 'store']);
         $bookmarkData['url'] = $url;
+        Arr::renameKey($bookmarkData, 'favicon', 'favicon_url');
         foreach ($bookmarkData as $key => $item) {
             $this->assertTrue($bookmark->$key === $item);
         }

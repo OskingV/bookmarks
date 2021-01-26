@@ -13,8 +13,11 @@ class BookmarkTest extends TestCase
 
     /**
      * Test store bookmark method
+     *
+     * @return void
+     *
      */
-    public function testStore()
+    public function testStore(): void
     {
         $storeBookmarkData = [
             'url' => 'https://www.google.com'
@@ -42,8 +45,11 @@ class BookmarkTest extends TestCase
 
     /**
      * Test get bookmarks list method
+     *
+     * @return void
+     *
      */
-    public function testIndex()
+    public function testIndex(): void
     {
         $bookmarks = Bookmark::factory()->count($this->faker->numberBetween(0, 3))->create();
         $url = config('app.url') . '/api/bookmarks';

@@ -2,10 +2,8 @@
 
 namespace App\Providers;
 
-use App\Models\Bookmark;
-use App\Observers\BookmarkObserver;
-use App\Services\Site\Contracts\Parser;
-use App\Services\Site\CrawlerParser;
+use App\Services\Bookmark\Contracts\Parser;
+use App\Services\Bookmark\CrawlerParser;
 use Illuminate\Support\ServiceProvider;
 
 class BookmarkServiceProvider extends ServiceProvider

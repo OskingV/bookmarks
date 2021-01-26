@@ -17,6 +17,13 @@ class Url
         return $parse['scheme'] . '://' . $parse['host'];
     }
 
+    /**
+     *
+     * Check correct url.
+     *
+     * @param string $string
+     * @return bool
+     */
     public static function isUrl(string $string): bool
     {
         return filter_var($string, FILTER_VALIDATE_URL);
