@@ -5,7 +5,6 @@ namespace App\Helpers;
 class Url
 {
     /**
-     *
      * Get base url.
      *
      * @param string $url
@@ -18,7 +17,6 @@ class Url
     }
 
     /**
-     *
      * Check correct url.
      *
      * @param string $string

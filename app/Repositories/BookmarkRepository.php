@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Collection;
 class BookmarkRepository extends BaseRepository
 {
     /**
-     *
      * Get model class.
      *
      * @return string
@@ -21,7 +20,6 @@ class BookmarkRepository extends BaseRepository
     }
 
     /**
-     *
      * Store bookmark to DB.
      *
      * @param array $data
@@ -33,7 +31,6 @@ class BookmarkRepository extends BaseRepository
     }
 
     /**
-     *
      * Get bookmarks list.
      *
      * @param array $sortConfig
@@ -57,7 +54,6 @@ class BookmarkRepository extends BaseRepository
     }
 
     /**
-     *
      * Get bookmark item by id.
      *
      * @param $bookmarkId
@@ -76,7 +72,6 @@ class BookmarkRepository extends BaseRepository
     }
 
     /**
-     *
      * Get collection for excel file.
      *
      * @return \Illuminate\Database\Eloquent\Collection
@@ -93,5 +88,16 @@ class BookmarkRepository extends BaseRepository
                 'meta_keywords',
                 'created_at'
             ]);
+    }
+
+    /**
+     * Destroy bookmark by id.
+     *
+     * @param int $id
+     * @return void
+     */
+    public function destroy(int $id): void
+    {
+        $this->model::destroy($id);
     }
 }

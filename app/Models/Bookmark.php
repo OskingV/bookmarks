@@ -10,7 +10,6 @@ class Bookmark extends Model
     use HasFactory;
 
     /**
-     *
      * The database name.
      *
      * @var string

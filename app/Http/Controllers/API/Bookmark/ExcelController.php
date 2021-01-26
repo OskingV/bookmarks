@@ -3,14 +3,13 @@
 namespace App\Http\Controllers\API\Bookmark;
 
 use App\Exports\BookmarksExport;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\API\Controller;
 use App\Services\Bookmark\BookmarkService;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class ExcelController extends Controller
 {
     /**
-     *
      * Return excel file with bookmarks.
      *
      * @param \App\Services\Bookmark\BookmarkService $repository

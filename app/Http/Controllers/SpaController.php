@@ -6,7 +6,6 @@ use Illuminate\Contracts\View\View;
 class SpaController extends Controller
 {
     /**
-     *
      * Return view for spa.
      *
      * @return \Illuminate\Contracts\View\View

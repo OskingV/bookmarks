@@ -6,7 +6,6 @@ use Illuminate\Support\Arr as ParentClass;
 class Arr extends ParentClass
 {
     /**
-     *
      * Create array by object fields.
      *
      * @param array $arr
@@ -23,7 +22,6 @@ class Arr extends ParentClass
     }
 
     /**
-     *
      * Rename key in array.
      *
      * @param array $arr
