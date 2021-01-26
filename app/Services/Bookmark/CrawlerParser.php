@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Services\Site;
-use App\Services\Site\Contracts\Parser;
+namespace App\Services\Bookmark;
+
+use App\Services\Bookmark\Contracts\Parser;
 use Symfony\Component\DomCrawler\Crawler;
 
 class CrawlerParser implements Parser
@@ -10,7 +11,7 @@ class CrawlerParser implements Parser
      *
      * Crawler instance.
      *
-     * @var Crawler
+     * @var \Symfony\Component\DomCrawler\Crawler
      */
     private $crawler;
 
@@ -25,7 +26,8 @@ class CrawlerParser implements Parser
     /**
      * Create a new parser service instance.
      *
-     * @param Crawler $crawler
+     * @param \Symfony\Component\DomCrawler\Crawler $crawler
+     * @return void
      */
     public function __construct(Crawler $crawler)
     {
@@ -68,7 +70,6 @@ class CrawlerParser implements Parser
      * Get parsed data.
      *
      * @param string $url
-     *
      * @return array
      */
     public function parse(string $url): array
@@ -86,11 +87,10 @@ class CrawlerParser implements Parser
      * Get date from html element by Crawler.
      *
      * @param array $xPath
-     * @param Crawler $element
-     *
-     * @return mixed
+     * @param \Symfony\Component\DomCrawler\Crawler $element
+     * @return string
      */
-    private function getDataFromElement(array $xPath, Crawler $element)
+    private function getDataFromElement(array $xPath, Crawler $element): string
     {
         if (isset($xPath[2])) {
             return $element->{$xPath[1]}($xPath[2]);

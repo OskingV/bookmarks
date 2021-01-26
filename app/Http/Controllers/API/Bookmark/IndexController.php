@@ -13,9 +13,8 @@ class IndexController extends Controller
      *
      * Return bookmarks list.
      *
-     * @param BookmarkService $service
-     *
-     * @return AnonymousResourceCollection
+     * @param \App\Services\Bookmark\BookmarkService $service
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function __invoke(BookmarkService $service): AnonymousResourceCollection
     {

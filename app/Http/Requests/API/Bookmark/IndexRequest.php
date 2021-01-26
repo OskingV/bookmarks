@@ -23,6 +23,9 @@ class IndexRequest extends FormRequest
      */
     public function rules()
     {
-        return [];
+        return [
+            'sort_field' => 'required_with:sort_type|in:created_at,url,title',
+            'sort_type' => 'required_with:sort_field|in:asc,desc'
+        ];
     }
 }

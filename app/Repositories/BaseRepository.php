@@ -9,12 +9,14 @@ abstract class BaseRepository
      *
      * Model instance.
      *
-     * @var Model
+     * @var \Illuminate\Database\Eloquent\Model
      */
     protected $model;
 
     /**
      * Create base repository instance.
+     *
+     * @return void
      */
     function __construct()
     {
@@ -33,9 +35,9 @@ abstract class BaseRepository
      *
      * Clone model property before get data.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|Model|mixed
+     * @return \Illuminate\Database\Eloquent\Model
      */
-    protected function start()
+    protected function start(): Model
     {
         return clone $this->model;
     }

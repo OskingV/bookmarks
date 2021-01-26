@@ -13,9 +13,8 @@ class ShowController extends Controller
      * Return bookmark info by id.
      *
      * @param $bookmarkId
-     * @param BookmarkService $service
-     *
-     * @return ItemResource
+     * @param \App\Services\Bookmark\BookmarkService $service
+     * @return \App\Http\Resources\API\Bookmark\ItemResource
      */
     public function __invoke($bookmarkId, BookmarkService $service): ItemResource
     {

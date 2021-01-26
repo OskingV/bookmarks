@@ -10,10 +10,10 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th scope="col">Created at</th>
+                        <th scope="col">Created at <sort field="created_at"></sort></th>
                         <th scope="col">Favicon</th>
-                        <th scope="col">Url</th>
-                        <th scope="col">Title</th>
+                        <th scope="col">Url <sort field="url"></sort></th>
+                        <th scope="col">Title <sort field="title"></sort></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -51,35 +51,62 @@
 </template>
 
 <script>
-    export default {
-        data () {
-            return {
-                page: 1
-            }
-        },
-        computed: {
-            list () {
-                return this.$store.getters['bookmark/list']
-            },
-            listMeta () {
-                return this.$store.getters['bookmark/listMeta']
-            }
-        },
-        methods: {
-            getListByPage (page) {
-                const payload = {
-                    page: page
-                };
-                this.$store.dispatch('bookmark/index', payload).then(() => {
-                    this.page = page
-                })
-            },
-            getList () {
-                this.$store.dispatch('bookmark/index', { page: this.page })
-            },
-        },
-        mounted() {
-            this.getList()
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faSortAmountUp, faSortAmountDown } from '@fortawesome/free-solid-svg-icons'
+import sort from './List/SortComponent'
+
+library.add(faSortAmountUp);
+library.add(faSortAmountDown);
+
+export default {
+    components: {
+        sort
+    },
+    data () {
+        return {
+            page: 1,
+            sortField: null,
+            sortType: null
         }
+    },
+    computed: {
+        list () {
+            return this.$store.getters['bookmark/list']
+        },
+        listMeta () {
+            return this.$store.getters['bookmark/listMeta']
+        }
+    },
+    methods: {
+        getListByPage (page) {
+            const payload = {
+                page: page
+            };
+            if (!(this.sortField === null && this.sortType === null)) {
+                payload.sort_field = this.sortField;
+                payload.sort_type = this.sortType;
+            }
+            this.$store.dispatch('bookmark/index', payload).then(() => {
+                this.page = page
+            })
+        },
+        getSortList (field, type) {
+            const payload = {
+                sort_field: field,
+                sort_type: type,
+                page: this.page
+            };
+            this.$store.dispatch('bookmark/index', payload).then(() => {
+                this.sortField = field;
+                this.sortType = type;
+            })
+        },
+        getList () {
+            this.$store.dispatch('bookmark/index', { page: this.page })
+        },
+    },
+    mounted() {
+        this.getList()
     }
+}
 </script>

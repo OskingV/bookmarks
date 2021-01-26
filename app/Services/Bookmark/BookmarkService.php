@@ -6,7 +6,7 @@ use App\Http\Requests\API\Bookmark\IndexRequest;
 use App\Http\Requests\API\Bookmark\StoreRequest;
 use App\Models\Bookmark;
 use App\Repositories\BookmarkRepository;
-use App\Services\Site\Contracts\Parser;
+use App\Services\Bookmark\Contracts\Parser;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class BookmarkService
@@ -15,14 +15,15 @@ class BookmarkService
      *
      * Bookmark repository.
      *
-     * @var BookmarkRepository
+     * @var \App\Repositories\BookmarkRepository
      */
     private $repository;
 
     /**
      * Create a new CRUD service instance.
      *
-     * @param BookmarkRepository $repository
+     * @param \App\Repositories\BookmarkRepository $repository
+     * @return void
      */
     public function __construct(BookmarkRepository $repository)
     {
@@ -33,8 +34,7 @@ class BookmarkService
      *
      * Store new bookmark.
      *
-     * @param StoreRequest $request
-     *
+     * @param \App\Http\Requests\API\Bookmark\StoreRequest $request
      * @return Bookmark
      */
     public function store(StoreRequest $request, Parser $parser): Bookmark
@@ -58,13 +58,16 @@ class BookmarkService
      *
      * Get bookmarks list collection.
      *
-     * @param IndexRequest $request
-     *
-     * @return LengthAwarePaginator
+     * @param \App\Http\Requests\API\Bookmark\IndexRequest $request
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
     public function getList(IndexRequest $request): LengthAwarePaginator
     {
-        return $this->repository->getList();
+        $sortConfig = $request->exists('sort_field') ? [
+            'field' => $request->sort_field,
+            'type' => $request->sort_type
+        ] : [];
+        return $this->repository->getList($sortConfig);
     }
 
     /**
@@ -72,8 +75,7 @@ class BookmarkService
      * Get bookmark by id.
      *
      * @param int $id
-     *
-     * @return Bookmark
+     * @return \App\Models\Bookmark
      */
     public function getItem(int $id): Bookmark
     {

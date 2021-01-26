@@ -24,8 +24,7 @@ class BookmarkRepository extends BaseRepository
      * Store bookmark to DB.
      *
      * @param array $data
-     *
-     * @return Model
+     * @return \App\Models\Bookmark
      */
     public function store(array $data): Bookmark
     {
@@ -33,11 +32,21 @@ class BookmarkRepository extends BaseRepository
     }
 
     /**
-     * @return LengthAwarePaginator
+     *
+     * Get bookmarks list.
+     *
+     * @param array $sortConfig
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function getList(): LengthAwarePaginator
+    public function getList(array $sortConfig = []): LengthAwarePaginator
     {
-        return $this->start()->paginate(3, [
+        $query = $this->start();
+        if (!empty($sortConfig)) {
+            $query = $query->orderBy($sortConfig['field'], $sortConfig['type']);
+        } else {
+            $query = $query->orderBy('created_at', 'desc');
+        }
+        return $query->paginate(3, [
             'id',
             'favicon_url',
             'url',
@@ -51,8 +60,7 @@ class BookmarkRepository extends BaseRepository
      * Get bookmark item by id.
      *
      * @param $bookmarkId
-     *
-     * @return Bookmark
+     * @return \App\Models\Bookmark
      */
     public function getItem($bookmarkId): Bookmark
     {
