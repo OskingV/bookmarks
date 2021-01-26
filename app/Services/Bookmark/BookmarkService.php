@@ -65,7 +65,8 @@ class BookmarkService
             'field' => $request->sort_field,
             'type' => $request->sort_type
         ] : [];
-        return $this->repository->getList($sortConfig);
+        $searchString = $request->exists('search') ? $request->search : '';
+        return $this->repository->getList($sortConfig, $searchString);
     }
 
     /**

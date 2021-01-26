@@ -7136,6 +7136,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -7149,7 +7155,8 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__.library.add(_fort
     return {
       page: 1,
       sortField: null,
-      sortType: null
+      sortType: null,
+      search: ''
     };
   },
   computed: {
@@ -7158,6 +7165,15 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__.library.add(_fort
     },
     listMeta: function listMeta() {
       return this.$store.getters['bookmark/listMeta'];
+    }
+  },
+  watch: {
+    search: function search(val) {
+      if (val.length > 2) {
+        this.getListBySearch(val);
+      } else {
+        this.getList();
+      }
     }
   },
   methods: {
@@ -7171,6 +7187,10 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__.library.add(_fort
       if (!(this.sortField === null && this.sortType === null)) {
         payload.sort_field = this.sortField;
         payload.sort_type = this.sortType;
+      }
+
+      if (this.search.length > 2) {
+        payload.search = this.search;
       }
 
       this.$store.dispatch('bookmark/index', payload).then(function () {
@@ -7189,6 +7209,12 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__.library.add(_fort
         _this2.sortField = field;
         _this2.sortType = type;
       });
+    },
+    getListBySearch: function getListBySearch(searchString) {
+      var payload = {
+        search: searchString
+      };
+      this.$store.dispatch('bookmark/index', payload);
     },
     getList: function getList() {
       this.$store.dispatch('bookmark/index', {
@@ -7451,6 +7477,34 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _c("div", { staticStyle: { "margin-top": "15px" } }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.search,
+                expression: "search"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text", placeholder: "Search" },
+            domProps: { value: _vm.search },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.search = $event.target.value
+              }
+            }
+          })
+        ])
+      ])
+    ]),
+    _vm._v(" "),
     _c("div", { staticClass: "row", staticStyle: { "margin-top": "15px" } }, [
       _c("div", { staticClass: "col-md-12" }, [
         _c("table", { staticClass: "table" }, [
@@ -7532,11 +7586,7 @@ var render = function() {
             _vm._l(_vm.listMeta.links, function(link) {
               return _c(
                 "li",
-                {
-                  key: link.label,
-                  staticClass: "page-item",
-                  class: { active: link.active }
-                },
+                { staticClass: "page-item", class: { active: link.active } },
                 [
                   _c(
                     "a",

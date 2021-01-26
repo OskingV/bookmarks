@@ -6,7 +6,7 @@ Vue.use(Vuex);
 import moduleBookmark from './bookmark/moduleBookmark.js'
 
 export default new Vuex.Store({
-  modules: {
-    bookmark: moduleBookmark
-  }
+    modules: {
+        bookmark: moduleBookmark
+    }
 })

@@ -12,6 +12,13 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div style="margin-top: 15px">
+                    <input type="text" class="form-control" placeholder="Search" v-model="search">
+                </div>
+            </div>
+        </div>
         <div class="row" style="margin-top:15px">
             <div class="col-md-12">
                 <table class="table">
@@ -41,7 +48,6 @@
                         <li
                             class="page-item"
                             v-for="link in listMeta.links"
-                            :key="link.label"
                             v-bind:class="{ active: link.active }"
                         >
                             <a
@@ -73,7 +79,8 @@ export default {
         return {
             page: 1,
             sortField: null,
-            sortType: null
+            sortType: null,
+            search: ''
         }
     },
     computed: {
@@ -84,6 +91,15 @@ export default {
             return this.$store.getters['bookmark/listMeta']
         }
     },
+    watch: {
+        search: function (val) {
+            if (val.length > 2) {
+                this.getListBySearch(val)
+            } else {
+                this.getList()
+            }
+        }
+    },
     methods: {
         getListByPage (page) {
             const payload = {
@@ -92,6 +108,9 @@ export default {
             if (!(this.sortField === null && this.sortType === null)) {
                 payload.sort_field = this.sortField;
                 payload.sort_type = this.sortType;
+            }
+            if (this.search.length >2) {
+                payload.search = this.search;
             }
             this.$store.dispatch('bookmark/index', payload).then(() => {
                 this.page = page
@@ -107,6 +126,12 @@ export default {
                 this.sortField = field;
                 this.sortType = type;
             })
+        },
+        getListBySearch (searchString) {
+            const payload = {
+                search: searchString
+            };
+            this.$store.dispatch('bookmark/index', payload)
         },
         getList () {
             this.$store.dispatch('bookmark/index', { page: this.page })

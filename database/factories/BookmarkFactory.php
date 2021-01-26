@@ -23,7 +23,7 @@ class BookmarkFactory extends Factory
     public function definition()
     {
         return [
-            'favicon_url' => $this->faker->url,
+            'favicon_url' => $this->faker->imageUrl(16, 16),
             'url' => $this->faker->unique()->url,
             'title' => $this->faker->company,
             'meta_description' => $this->faker->sentence,

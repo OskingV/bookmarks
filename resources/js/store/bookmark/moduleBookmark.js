@@ -4,9 +4,9 @@ import actions from './moduleBookmarkActions.js'
 import getters from './moduleBookmarkGetters.js'
 
 export default {
-  namespaced: true,
-  state,
-  mutations,
-  actions,
-  getters
+    namespaced: true,
+    state,
+    mutations,
+    actions,
+    getters
 }

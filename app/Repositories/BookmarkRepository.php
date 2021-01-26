@@ -34,15 +34,19 @@ class BookmarkRepository extends BaseRepository
      * Get bookmarks list.
      *
      * @param array $sortConfig
+     * @param string $searchString
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function getList(array $sortConfig = []): LengthAwarePaginator
+    public function getList(array $sortConfig = [], string $searchString = ''): LengthAwarePaginator
     {
         $query = $this->start();
         if (!empty($sortConfig)) {
             $query = $query->orderBy($sortConfig['field'], $sortConfig['type']);
         } else {
             $query = $query->orderBy('created_at', 'desc');
+        }
+        if ($searchString) {
+            $query->whereRaw("MATCH(url, title, meta_description, meta_keywords) AGAINST('" . $searchString . "*' IN BOOLEAN MODE)");
         }
         return $query->paginate(3, [
             'id',
