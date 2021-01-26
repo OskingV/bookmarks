@@ -8,7 +8,6 @@ use Symfony\Component\DomCrawler\Crawler;
 class CrawlerParser implements Parser
 {
     /**
-     *
      * Crawler instance.
      *
      * @var \Symfony\Component\DomCrawler\Crawler
@@ -16,7 +15,6 @@ class CrawlerParser implements Parser
     private $crawler;
 
     /**
-     *
      * Info for parsing by Crawler.
      *
      * @var array
@@ -66,7 +64,6 @@ class CrawlerParser implements Parser
     }
 
     /**
-     *
      * Get parsed data.
      *
      * @param string $url
@@ -83,7 +80,6 @@ class CrawlerParser implements Parser
     }
 
     /**
-     *
      * Get date from html element by Crawler.
      *
      * @param array $xPath

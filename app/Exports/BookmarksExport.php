@@ -14,7 +14,6 @@ class BookmarksExport implements FromCollection, WithTitle, WithMapping, WithHea
     use Exportable;
 
     /**
-     *
      * Bookmarks collection.
      *
      * @var \Illuminate\Support\Collection
@@ -22,7 +21,6 @@ class BookmarksExport implements FromCollection, WithTitle, WithMapping, WithHea
     protected $bookmarks;
 
     /**
-     *
      * Array with sheet headings.
      *
      * @var array
@@ -59,7 +57,6 @@ class BookmarksExport implements FromCollection, WithTitle, WithMapping, WithHea
     }
 
     /**
-     *
      * Return bookmarks collection.
      *
      * @return \Illuminate\Support\Collection
@@ -70,7 +67,6 @@ class BookmarksExport implements FromCollection, WithTitle, WithMapping, WithHea
     }
 
     /**
-     *
      * Return sheet title.
      *
      * @return string
@@ -81,7 +77,6 @@ class BookmarksExport implements FromCollection, WithTitle, WithMapping, WithHea
     }
 
     /**
-     *
      * Modify bookmark fields before incude to sheet.
      *
      * @param \App\Models\Bookmark $bookmark
@@ -101,7 +96,6 @@ class BookmarksExport implements FromCollection, WithTitle, WithMapping, WithHea
     }
 
     /**
-     *
      * Return sheet headings.
      *
      * @return array

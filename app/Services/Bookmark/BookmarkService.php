@@ -13,7 +13,6 @@ use Illuminate\Database\Eloquent\Collection;
 class BookmarkService
 {
     /**
-     *
      * Bookmark repository.
      *
      * @var \App\Repositories\BookmarkRepository
@@ -32,7 +31,6 @@ class BookmarkService
     }
 
     /**
-     *
      * Store new bookmark.
      *
      * @param \App\Http\Requests\API\Bookmark\StoreRequest $request
@@ -56,7 +54,6 @@ class BookmarkService
     }
 
     /**
-     *
      * Get bookmarks list collection.
      *
      * @param \App\Http\Requests\API\Bookmark\IndexRequest $request
@@ -72,7 +69,6 @@ class BookmarkService
     }
 
     /**
-     *
      * Get bookmark by id.
      *
      * @param int $id
@@ -84,7 +80,6 @@ class BookmarkService
     }
 
     /**
-     *
      * Get bookmarks list collection for excel file.
      *
      * @return \Illuminate\Database\Eloquent\Collection
@@ -92,5 +87,16 @@ class BookmarkService
     public function getExcelList(): Collection
     {
         return $this->repository->getExcelList();
+    }
+
+    /**
+     * Destroy bookmark by id.
+     *
+     * @param int $id
+     * @return void
+     */
+    public function destroyById(int $id): void
+    {
+        $this->repository->destroy($id);
     }
 }

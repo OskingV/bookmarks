@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 abstract class BaseRepository
 {
     /**
-     *
      * Model instance.
      *
      * @var \Illuminate\Database\Eloquent\Model
@@ -24,7 +23,6 @@ abstract class BaseRepository
     }
 
     /**
-     *
      * Get model class.
      *
      * @return string
@@ -32,7 +30,6 @@ abstract class BaseRepository
     abstract protected function getModelClass(): string;
 
     /**
-     *
      * Clone model property before get data.
      *
      * @return \Illuminate\Database\Eloquent\Model

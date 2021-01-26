@@ -39,6 +39,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -53,10 +61,33 @@ __webpack_require__.r(__webpack_exports__);
       return this.$store.getters['bookmark/item'];
     }
   },
+  methods: {
+    destroy: function destroy() {
+      var _this = this;
+
+      if (this.showPasswordInput) {
+        var payload = {
+          id: this.id,
+          password: this.password
+        };
+        this.$store.dispatch('bookmark/delete', payload).then(function () {
+          _this.$router.push({
+            name: 'list'
+          });
+        })["catch"](function (error) {
+          if (error.response.status === 401) {
+            _this.showErrorMessage = true;
+          }
+        });
+      } else {
+        this.showPasswordInput = true;
+      }
+    }
+  },
   created: function created() {
     this.id = this.$route.params.id;
 
-    if (this.$route.params.load || this.$route.params.load === undefined) {
+    if (this.$route.params.load) {
       this.$store.dispatch('bookmark/show', {
         id: this.id
       });
@@ -202,7 +233,71 @@ var render = function() {
             _vm._v(" "),
             _c("p", { staticClass: "card-text" }, [
               _vm._v(_vm._s(_vm.item.meta_description))
-            ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "form",
+              {
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.destroy($event)
+                  }
+                }
+              },
+              [
+                _vm.showPasswordInput
+                  ? _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "inputPassword" } }, [
+                        _vm._v("Password")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.password,
+                            expression: "password"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "password",
+                          id: "inputPassword",
+                          placeholder: "Enter password"
+                        },
+                        domProps: { value: _vm.password },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.password = $event.target.value
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.showErrorMessage
+                        ? _c(
+                            "small",
+                            {
+                              staticClass: "form-text text-muted",
+                              staticStyle: { color: "red!important" }
+                            },
+                            [_vm._v("Invalid password.")]
+                          )
+                        : _vm._e()
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  { staticClass: "btn btn-danger", attrs: { type: "submit" } },
+                  [_vm._v("Delete")]
+                )
+              ]
+            )
           ])
         ])
       ])

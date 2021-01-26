@@ -46,4 +46,14 @@ export default {
                 })
         })
     },
+    delete ({ commit }, payload) {
+        return new Promise((resolve, reject) => {
+            axios.post(`/api/bookmarks/${payload.id}`, { _method: 'DELETE', password: payload.password })
+                .then((response) => {
+                    commit('retrieveItem', response.data.data);
+                    resolve(response)
+                })
+                .catch((error) => { reject(error) })
+        })
+    },
 }
